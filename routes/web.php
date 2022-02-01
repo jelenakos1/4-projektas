@@ -16,11 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
 Route::prefix('articles')->group(function() {
-    //index.blade.php
-    //creat
-    //edit
- 
+    
     //article
     Route::get('', 'App\Http\Controllers\ArticleController@index')->name('article.index');
    
@@ -28,6 +26,14 @@ Route::prefix('articles')->group(function() {
    Route::post('store','App\Http\Controllers\ArticleController@store')->name('article.store');
   Route::get('edit','App\Http\Controllers\ArticleController@edit')->name('article.edit');
  });
-Auth::routes();
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('articalimages')->group(function() {
+
+    Route::get('', 'App\Http\Controllers\ArticalimageController@index')->name('articalimage.index');
+    Route::get('create', 'App\Http\Controllers\ArticalimageController@create')->name('articalimage.create');
+    Route::post('store', 'App\Http\Controllers\ArticalimageController@store' )->name('articalimage.store');
+    Route::get('edit/{articalimage}', 'App\Http\Controllers\ArticalimageController@edit')->name('articalimage.edit');
+    Route::post('update/{articalimage}', 'App\Http\Controllers\ArticalimageController@update')->name('articaleimage.update');
+});

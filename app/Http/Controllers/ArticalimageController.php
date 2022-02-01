@@ -17,7 +17,7 @@ class ArticalimageController extends Controller
     public function index()
     {
         $articalimages = Articalimage::all();
-        return view('articalimages.index', ['articalimages' => $articalimages]);
+        return view('articalimage.index', ['articalimages' => $articalimages]);
     }
 
     /**
@@ -27,7 +27,7 @@ class ArticalimageController extends Controller
      */
     public function create()
     {
-        return view('articalimages.create');
+        return view('articalimage.create');
     }
 
     /**
@@ -42,10 +42,14 @@ class ArticalimageController extends Controller
           $articalimage = new Articalimage();
 
           $articalimage->alt = $request->articalimage_alt;
-          $articalimage->src =  $request->articalimage_src;
-          $articalimage->width = $request->articalimage_width;
-          $articalimage->height =  $request->articalimage_height;
-          $articalimage->class =  $request->articalimage_class;
+
+          $imageName = 'image' . time().'.'.$request->image_src->extension();
+          $request->image_src->move(public_path('images') , $imageName);
+          $articalimage->src = $imageName;
+
+          $articalimage->width = $request->image_width;
+          $articalimage->height =  $request->image_height;
+          $articalimage->class =  $request->image_class;
           $articalimage->save();
   
           return redirect()->route('articalimage.index');
@@ -70,7 +74,7 @@ class ArticalimageController extends Controller
      */
     public function edit(Articalimage $articalimage)
     {
-        return view('articalimages.edit');
+        return view('articalimages.edit', ['articaleimage'=>$articalimage]);
     }
 
     /**
@@ -80,9 +84,22 @@ class ArticalimageController extends Controller
      * @param  \App\Models\Articalimage  $articalimage
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateArticalimageRequest $request, Articalimage $articalimage)
+    public function update(Request $request, Articalimage $articalimage)
     {
-        //
+        if($request->has('image_src')) {
+            $imageName = 'image' . time().'.'.$request->image_src->extension();
+            $request->image_src->move(public_path('images') , $imageName);
+            $articalimage->src = $imageName;
+        }
+
+        $articalimage->alt = $request->image_alt;
+        $articalimage->width = $request->image_width;
+        $articalimage->height = $request->image_height;
+        $articalimage->class = $request->image_class;
+
+
+
+        $articalimage->save();
     }
 
     /**
