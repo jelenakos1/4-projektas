@@ -28,3 +28,6 @@ Route::prefix('articles')->group(function() {
    Route::post('store','App\Http\Controllers\ArticleController@store')->name('article.store');
   Route::get('edit','App\Http\Controllers\ArticleController@edit')->name('article.edit');
  });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
