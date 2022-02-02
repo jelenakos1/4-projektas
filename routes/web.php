@@ -39,3 +39,14 @@ Route::prefix('articalimages')->group(function() {
     Route::get('edit/{articalimage}', 'App\Http\Controllers\ArticalimageController@edit')->name('articalimage.edit');
     Route::post('update/{articalimage}', 'App\Http\Controllers\ArticalimageController@update')->name('articaleimage.update');
 });
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::prefix('articlecategories')->group(function() {
+    
+    //article
+    Route::get('', 'App\Http\Controllers\ArticlecategoryController@index')->name('articlecategory.index');
+   
+  Route::get('create','App\Http\Controllers\ArticlecategoryController@create')->name('articlecategory.create');
+   Route::post('store','App\Http\Controllers\ArticlecategoryController@store')->name('articlecategory.store');
+  Route::get('edit','App\Http\Controllers\ArticlecategoryController@edit')->name('articlecategory.edit');
+ });
