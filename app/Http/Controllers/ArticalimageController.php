@@ -17,7 +17,7 @@ class ArticalimageController extends Controller
     public function index()
     {
         $articalimages = Articalimage::all();
-        return view('articalimage.index', ['articalimages' => $articalimages]);
+        return view('articalimages.index', ['articalimages' => $articalimages]);
     }
 
     /**
@@ -27,7 +27,7 @@ class ArticalimageController extends Controller
      */
     public function create()
     {
-        return view('articalimage.create');
+        return view('articalimages.create');
     }
 
     /**
@@ -63,7 +63,7 @@ class ArticalimageController extends Controller
      */
     public function show(Articalimage $articalimage)
     {
-        //
+        return view('articalimages.show');
     }
 
     /**
@@ -110,6 +110,6 @@ class ArticalimageController extends Controller
      */
     public function destroy(Articalimage $articalimage)
     {
-        //
+        return view('articalimages.destroy');
     }
 }
