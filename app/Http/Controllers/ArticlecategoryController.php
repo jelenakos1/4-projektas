@@ -15,7 +15,8 @@ class ArticlecategoryController extends Controller
      */
     public function index()
     {
-        //
+        $articlecategories = Articlecategory::all();
+        return view('articlecategories.index', ['articlecategories' => $articlecategories]);
     }
 
     /**
@@ -25,7 +26,7 @@ class ArticlecategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('articlecategories.create');
     }
 
     /**
@@ -34,9 +35,17 @@ class ArticlecategoryController extends Controller
      * @param  \App\Http\Requests\StoreArticlecategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreArticlecategoryRequest $request)
+    public function store(Request $request)
     {
-        //
+        $articlecategory = new Articlecategory;
+  
+        $articlecategory->title = $request->articlecategory_title;
+        $articlecategory->description =  $request->articlecategory_description;
+       
+
+        $articlecategory->save();
+
+        return redirect()->route('articlecategory.index');
     }
 
     /**

@@ -43,7 +43,10 @@ class ArticleController extends Controller
           $article = new Article;
   
           $article->title = $request->article_title;
+          $article->excerpt = $request->article_excerpt;
           $article->description =  $request->article_description;
+          $article->author = $request->article_author;
+          $article->category_id = $request->article_category_id;
          
   
           $article->save();
@@ -60,7 +63,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        return view('articles.show', ['article'=>$article]);
     }
 
     /**
@@ -71,7 +74,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        return view('articles.edit');
+        return view('articles.edit', ['article'=>$article]);
     }
 
     /**
@@ -83,7 +86,7 @@ class ArticleController extends Controller
      */
     public function update(UpdateArticleRequest $request, Article $article)
     {
-        //
+        return view('articles.update', ['article'=>$article]);
     }
 
     /**
@@ -94,6 +97,6 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        return view('articles.destroy', ['article'=>$article]);
     }
 }
