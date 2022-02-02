@@ -9,6 +9,6 @@ class Articalimage extends Model
 {
     use HasFactory;
     
-    return $this->belongsTo('App\Models\Article');
+    //return $this->belongsTo('App\Models\Article');
 
 }

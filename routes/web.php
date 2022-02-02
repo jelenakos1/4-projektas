@@ -17,6 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::prefix('articles')->group(function() {
     
     //article
@@ -29,6 +30,7 @@ Route::prefix('articles')->group(function() {
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::prefix('articalimages')->group(function() {
 
     Route::get('', 'App\Http\Controllers\ArticalimageController@index')->name('articalimage.index');
